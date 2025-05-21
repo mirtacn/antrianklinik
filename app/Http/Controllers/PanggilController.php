@@ -420,6 +420,7 @@ class PanggilController extends Controller
     public function kirimEmail($id)
 {
     try {
+        // Get the antrian data
         $antrian = DB::table('antrian')
             ->leftJoin('pasien_umum', 'antrian.id_pasienumum', '=', 'pasien_umum.id')
             ->leftJoin('pasien_bpjs', 'antrian.id_pasienbpjs', '=', 'pasien_bpjs.id')
@@ -430,6 +431,7 @@ class PanggilController extends Controller
             ->select(
                 'antrian.no_antrian',
                 'antrian.id',
+                'antrian.status_antrian',
                 DB::raw('COALESCE(pasien_umum.nama, pasien_bpjs.nama) AS nama'),
                 'poli.nama_poli',
                 'poli.kode_poli',
@@ -437,7 +439,8 @@ class PanggilController extends Controller
                 'antrian.tanggal_antrian',
                 'antrian.waktu_estimasi',
                 'antrian.email',
-                'dokter.nama_dokter'
+                'dokter.nama_dokter',
+                'antrian.id_poli'
             )
             ->where('antrian.id', $id)
             ->first();
@@ -450,6 +453,33 @@ class PanggilController extends Controller
             return response()->json(['success' => false, 'message' => 'Pasien tidak memiliki alamat email']);
         }
 
+        // Get current called antrian for the same poli
+        $currentCalled = DB::table('antrian')
+            ->leftJoin('pasien_umum', 'antrian.id_pasienumum', '=', 'pasien_umum.id')
+            ->leftJoin('pasien_bpjs', 'antrian.id_pasienbpjs', '=', 'pasien_bpjs.id')
+            ->join('poli', 'antrian.id_poli', '=', 'poli.id')
+            ->select(
+                'antrian.no_antrian',
+                DB::raw('COALESCE(pasien_umum.nama, pasien_bpjs.nama) AS nama')
+            )
+            ->where('antrian.id_poli', $antrian->id_poli)
+            ->whereDate('antrian.tanggal_antrian', today())
+            ->where('antrian.status_antrian', 'dipanggil')
+            ->orderBy('antrian.last_panggilan', 'desc')
+            ->first();
+
+        // Get waiting count for the same poli
+        $waitingCount = DB::table('antrian')
+            ->where('id_poli', $antrian->id_poli)
+            ->whereDate('tanggal_antrian', today())
+            ->where('status_antrian', 'menunggu')
+            ->count();
+
+        // Add additional information to the antrian object
+        $antrian->current_called = $currentCalled ? $currentCalled->kode_poli .''. $currentCalled->no_antrian . ' - ' . $currentCalled->nama : 'Tidak ada';
+        $antrian->waiting_count = $waitingCount;
+        $antrian->your_position = $this->getPositionInQueue($id, $antrian->id_poli);
+
         // Send email
         Mail::to($antrian->email)->send(new AntrianNotification($antrian));
 
@@ -457,5 +487,20 @@ class PanggilController extends Controller
     } catch (\Exception $e) {
         return response()->json(['success' => false, 'message' => 'Gagal mengirim email: ' . $e->getMessage()]);
     }
+}
+
+private function getPositionInQueue($antrianId, $poliId)
+{
+    $antrians = DB::table('antrian')
+        ->where('id_poli', $poliId)
+        ->whereDate('tanggal_antrian', today())
+        ->where('status_antrian', 'menunggu')
+        ->orderBy('no_antrian', 'asc')
+        ->pluck('id')
+        ->toArray();
+
+    $position = array_search($antrianId, $antrians);
+
+    return $position !== false ? $position + 1 : null;
 }
 }

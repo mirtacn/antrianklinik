@@ -73,16 +73,22 @@
                                         </button>
                                         @php
                                         $phone = preg_replace('/[^0-9]/', '', '+62'. $antrian->no_telepon. '');
+
+                                        // Fetch the current called queue number and doctor for the same poli
+                                        $currentCalled = $antrians->firstWhere('status_antrian', 'dipanggil');
+                                        $currentQueueNumber = $currentCalled ? $currentCalled->kode_poli . $currentCalled->no_antrian : 'Tidak ada';
+
+
                                         $message = urlencode('Dear *' . $antrian->nama . '*,
-
 Terima kasih telah melakukan pendaftaran di *Klinik Mabarrot Hasyimiyah Manyar Gresik*. Berikut detail antrian Anda:
-
 ────────────────
-▪ *Layanan:* ' . $antrian->nama_poli . '
-▪ *Dokter:* ' . $antrian->nama_dokter . '
-▪ *Tanggal Antrian:* ' . $antrian->tanggal_antrian . '
-▪ *Estimasi Dilayani:* ' . $antrian->waktu_estimasi . '
-▪ *Nomor Antrian:* '.$antrian->kode_poli.''. $antrian->no_antrian . '
+*Layanan:* ' . $antrian->nama_poli . '
+*Dokter:* ' . $antrian->nama_dokter . '
+*Tanggal Antrian:* ' . $antrian->tanggal_antrian . '
+*Estimasi Dilayani:* ' . $antrian->waktu_estimasi . '
+*Nomor Antrian:* '.$antrian->kode_poli.''. $antrian->no_antrian . '
+*Status Antrian:* ' . $antrian->status_antrian . '
+*Antrian Saat Ini:* ' . $currentQueueNumber . '
 ────────────────
 
 *Catatan:*
@@ -93,11 +99,11 @@ Terima kasih telah melakukan pendaftaran di *Klinik Mabarrot Hasyimiyah Manyar G
 Salam hangat,
 *Tim Layanan Klinik Mabarrot Hasyimiyah*');
                                         $whatsappLink = "https://wa.me/{$phone}?text={$message}";
-                                    @endphp
+                                        @endphp
 
-                                    <a href="{{ $whatsappLink }}" target="_blank" class="btn btn-sm btn-success me-1" style="background-color: #297746; color:white">
-                                        <i class="bi bi-whatsapp"></i> WhatsApp
-                                    </a>
+                                        <a href="{{ $whatsappLink }}" target="_blank" class="btn btn-sm btn-success me-1" style="background-color: #297746; color:white">
+                                            <i class="bi bi-whatsapp"></i> WhatsApp
+                                        </a>
                                     @elseif($antrian->status_antrian == 'dipanggil')
                                         <button class="btn btn-sm btn-primary me-1" onclick="updateStatus({{ $antrian->id }}, 'selesai')">
                                             <i class="bi bi-check-circle-fill"></i> Selesai
