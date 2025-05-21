@@ -1,0 +1,490 @@
+header {
+    background-color: #fdfaf5;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.logo {
+    width: 70px;
+    height: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.title {
+    font-size: 18px;
+    font-weight: 700;
+    font-family: 'Manrope', sans-serif;
+}
+
+.navbar-nav .nav-link {
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #ff7f50;
+}
+
+body {
+    font-family: 'Manrope', sans-serif;
+    background-color: #fdfaf5;
+    display: flex;
+    flex-direction: column;
+    /* min-height: 100vh; */
+}
+
+#home {
+    /* margin-top: -50px; */
+    background-color: #fdfaf5;
+}
+
+h1 {
+    font-size: 40px;
+    font-weight: 700;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.img-doctor {
+    height: auto;
+    width: 90%
+}
+
+.btn-custom {
+    background-color: #EC744A;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 30px;
+    font-weight: 700;
+    text-decoration: none;
+    display: inline-block;
+    transition: 0.3s ease-in-out;
+}
+
+.link{
+    text-decoration: none;
+    color: white;
+}
+
+.btn-custom:hover {
+    background-color: #d65f38;
+}
+
+.monitor {
+    margin-top: -49px;
+    font-family: 'Manrope', sans-serif;
+    background: linear-gradient(90deg, #007D6E 0%, #5EB47C 100%);
+    color: white;
+    text-align: center;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 0;
+}
+
+.about-text p{
+    max-width: 600px;
+    text-align: justify;
+}
+
+.about img {
+    height: 10%;
+    width: 70%
+}
+
+.black-text {
+    color: black;
+}
+
+.orange-text {
+    color: #E07C48;
+}
+
+.service-list {
+    list-style: none;
+    padding: 0;
+}
+
+.service-list li {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.img-services {
+    max-width: 75%;
+    height: auto;
+}
+
+h2 {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 25px;
+}
+
+.contact-section {
+    margin-top: -48px;
+    background: linear-gradient(90deg, #007D6E 0%, #5EB47C 100%);
+    color: white;
+    padding: 50px 0;
+}
+
+.contact-info p {
+    margin-right: 10px;
+}
+
+.social-icons a {
+    color: white;
+    margin: 0 10px;
+    font-size: 20px;
+}
+
+#pesan {
+    background: linear-gradient(90deg, #007D6E 0%, #5EB47C 100%);
+}
+
+.form-title {
+    color: #EC744A;
+    font-family: 'Manrope', sans-serif;
+    text-align: center;
+}
+
+.form-container {
+    margin-left: 50px;
+    margin-right: 50px;
+    padding: 50px;
+    background-color: #ffffff;
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+    border-radius: 50px;
+}
+
+.form-label {
+    font-weight: bold;
+    border-radius: 100px;
+}
+
+.form-control, .form-select {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.btn-submit {
+    width: 100%;
+    background-color: #EC744A;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 30px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: none;
+}
+
+.btn-submit:hover {
+    background-color: #EC744A;
+    color: white;
+}
+
+.tittle-tiket {
+    font-size: 25px;
+    color: #000000;
+    font-family: 'Manrope', sans-serif;
+    text-align: center;
+    font-weight: 900;
+}
+
+.tittle-klinik {
+    margin-top: 35px;
+    font-size: 20px;
+    color: #000000;
+    font-family: 'Manrope', sans-serif;
+    text-align: center;
+}
+
+.tittle-alamat {
+    margin-top: 17px;
+    font-size: 15px;
+    color: #646464;
+    font-family: 'Manrope', sans-serif;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* .nomor-antrian {
+    font-size: 100px;
+    color: #000000;
+    font-family: 'Manrope', sans-serif;
+    text-align: center;
+    font-weight: 700;
+} */
+
+.nomor-NIK {
+    font-size: 20px;
+    color: #000000;
+    font-family: 'Manrope', sans-serif;
+    text-align: center;
+}
+
+.nama {
+    margin-top: 17px;
+    font-size: 15px;
+    color: #000000;
+    font-family: 'Manrope', sans-serif;
+    text-align: center;
+    font-weight: 500;
+}
+
+.note {
+    margin-top: 65px;
+    font-size: 15px;
+    color: #646464;
+    font-family: 'Manrope', sans-serif;
+    text-align: left;
+    font-weight: 500;
+}
+
+.note-1{
+    margin-top: 15px;
+    font-size: 15px;
+    color: #646464;
+    font-family: 'Manrope', sans-serif;
+    text-align: left;
+    font-weight: 500;
+}
+
+.btn-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+    padding: 0 20px;
+}
+
+.btn-monitor {
+    background-color: #f6b220;
+    color: rgb(0, 0, 0);
+    padding: 15px 25px;
+    border-radius: 30px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.3s ease-in-out;
+    text-align: center;
+    flex: 1;
+    min-width: 200px;
+    max-width: 300px;
+    margin: 0;
+}
+
+.btn-unduh {
+    background-color: #EC744A;
+    color: white;
+    padding: 15px 25px;
+    border-radius: 30px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.3s ease-in-out;
+    text-align: center;
+    flex: 1;
+    min-width: 200px;
+    max-width: 300px;
+    margin: 0;
+}
+
+.btn-unduh:hover {
+    background-color: #d65f38;
+    color: white;
+}
+
+.btn-unduh i {
+    margin-right: 8px;
+}
+
+/* Untuk tampilan mobile */
+@media (max-width: 576px) {
+    .btn-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .btn-unduh {
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+    width: 100%;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+#antrian {
+    background: linear-gradient(90deg, #007D6E 0%, #5EB47C 100%) !important;
+    width: 100%;
+    min-height: 100vh; /* Add this line */
+    padding: 20px 40px;
+}
+
+/* .row {
+    margin-left: 0;
+    margin-right: 0;
+} */
+
+.antrian-box {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.antrian-box .card-header {
+    background-color: #eb5e34;
+    color: white;
+    font-weight: bold;
+    padding: 15px;
+    font-size: 18px;
+}
+
+.antrian-box:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.antrian-box .nomor-antrian {
+    font-size: 40px;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.antrian-box .nama-pasien {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.nama-pasien {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+.antrian-box .waiting-list li {
+    font-size: 16px;
+    padding: 5px 0;
+    border-bottom: 1px solid #eee;
+}
+
+/* #videoPlayer {
+    width: 100%;
+    height: 100%;
+    max-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    overflow: hidden;
+} */
+
+main {
+    flex: 1;
+}
+
+footer {
+    background-color: #ffeb3b;
+    font-weight: bold;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    margin-top: 50px; /* Add this line */
+}
+
+.card-header {
+    background-color: #2c3e50;
+    color: white;
+    font-weight: bold;
+    border-bottom: none;
+    padding: 0.75rem;
+}
+
+.antrian-box {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.antrian-box .card-body {
+    width: 100%;
+    flex: 1;
+    overflow-y: auto;
+}
+
+.nomor-antrian {
+    font-size: 90px;
+    font-weight: bold;
+    color: #e74c3c;
+    text-align: center;
+    font-weight: 600;
+}
+
+.waiting-list {
+    max-height: 100px;
+    overflow-y: auto;
+}
+
+.waiting-list li {
+    padding: 0.2rem 0;
+    border-bottom: 1px dashed #eee;
+}
+
+@media (max-width: 768px) {
+    .nomor-antrian {
+        font-size: 2rem;
+    }
+
+    .card-header h5 {
+        font-size: 1rem;
+    }
+}
+
+#videoPlayer {
+    width: 100%;
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+footer {
+    background-color: #ffeb3b;
+    font-weight: bold;
+}

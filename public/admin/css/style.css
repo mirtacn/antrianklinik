@@ -1,0 +1,265 @@
+body {
+    width: 100%;
+    font-family: 'Manrope', sans-serif;
+    background-color: #FCF8F4;
+}
+
+.card {
+    border: 2px solid #27AE60;
+    border-radius: 30px;
+    background-color: white;
+}
+
+.form-control {
+    background-color: transparent !important;
+    border: 1px solid #27AE60;
+    border-radius: 5px;
+}
+
+.btn {
+    border-radius: 5px;
+    background-color: #75A288;
+    color: white;
+}
+
+.form-label {
+    font-weight: bold;
+}
+
+.logo {
+    width: 80px;
+    margin-bottom: 15px;
+}
+
+.sidebar {
+    position: sticky;
+    top: 0; /* Jarak dari atas viewport */
+    align-self: flex-start; /* Untuk memastikan sticky bekerja dalam flex container */
+    width: 250px;
+    height: 100vh; /* Tinggi penuh viewport */
+    background-color: #EAF3E2;
+    padding: 20px;
+    overflow-y: auto; /* Scroll jika konten melebihi tinggi */
+    display: flex;
+    flex-direction: column;
+}
+
+.d-flex {
+    align-items: stretch; /* Supaya sidebar ikut tinggi konten */
+}
+
+
+.sidebar h6 {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.nav-link {
+    font-size: 16px;
+    font-weight: 500;
+    color: #2C3E50;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background-color: #97D5B1;
+    color: inherit;
+    border-radius: 5px;
+}
+
+.submenu {
+    list-style-type: none;
+    padding-left: 20px;
+}
+
+.poli-card {
+    border-radius: 10px;
+    padding: 15px;
+    color: #2C3E50;
+}
+
+.poli-kia {
+    border: none;
+    background-color: #DDEEFF;
+}
+
+.poli-gigi {
+    border: none;
+    background-color: #FFF7D6;
+}
+
+.poli-umum {
+    border: none;
+    background-color: #FFDDDD;
+}
+
+.poli-vaksinasi {
+    border: none;
+    background-color: #FFE5C4;
+}
+
+.poli-kandungan {
+    border: none;
+    background-color: #FFC4D6;
+}
+
+.container-fluid {
+    padding: 20px;
+}
+
+h3 {
+    color: #333;
+}
+
+.btn-tambah {
+    border-radius: 5px;
+    background-color: #FFDC7F;
+    width: 200px;
+    height: 40px;
+    border: none;
+}
+
+.btn-tambah:hover {
+    background-color: #ffc933;
+    border-color: #ffc933;
+}
+
+.table {
+    margin-top: 20px;
+    border-radius: 30px;
+    border-collapse: collapse;
+}
+
+.table th {
+    vertical-align: middle;
+    text-align: center;
+    border: none;
+    background-color: #B3D8A8;
+}
+
+.table td {
+    vertical-align: middle;
+    text-align: center;
+    border: none;
+}
+
+.btn-sm {
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+.btn-primary {
+    background-color: #EC744A;
+    border-color: #EC744A;
+}
+
+.btn-primary:hover {
+    background-color: #e45a28;
+    border-color: #e45a28;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+.table tbody tr:nth-child(even) td {
+    background-color: #ebebeb;
+}
+
+.form-search {
+    width: 100%;
+    height: 40px;
+}
+
+.btn-cari {
+    border: none;
+    background-color: #B3D8A8;
+    text-align: center;
+    width: 100px;
+    height: 40px;
+}
+
+.btn-cari:hover {
+    background-color: #A3CDA8;
+}
+
+/* public/admin/css/style.css */
+.pagination {
+    display: flex;
+    justify-content: center; /* Ubah ke center untuk meratakan */
+    margin-top: 20px;
+}
+
+.pagination .page-item {
+    margin: 0 5px;
+}
+
+.pagination .page-link {
+    color: #2C3E50;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    padding: 8px 12px; /* Tambah padding untuk ukuran yang lebih baik */
+    text-decoration: none;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #B3D8A8;
+    border-color: #B3D8A8;
+    color: white;
+}
+
+.pagination .page-link:hover {
+    background-color: #A3CDA8;
+    border-color: #A3CDA8;
+    color: rgb(0, 0, 0);
+}
+
+.add {
+    background-color: white;
+}
+
+.btn-info {
+    background-color: #5887e5;
+    border-color: #5887e5;
+}
+
+.btn-info:hover {
+    background-color: #3874ec;
+    border-color: #3874ec;
+    color: white;
+}
+
+.btn-success {
+    background-color: #e5d258;
+    border-color: #e5de58;
+    color: black;
+}
+
+.btn-success:hover {
+    background-color: #cec023;
+    border-color: #cec023;
+    color: black;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #97D5B1;
+    text-align: center;
+    padding: 10px;
+}
+
+.btn-secondary[disabled] {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
