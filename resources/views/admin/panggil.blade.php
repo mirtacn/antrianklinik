@@ -8,15 +8,15 @@
             <div class="card" style="width: 100%; padding: 20px; border: none;">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h3 class="mb-0">Panggil Antrian</h3>
-                    <form class="d-flex">
-                        <select class="form-select me-2" name="poli">
+                    <form class="d-flex" id="filterForm">
+                        <select class="form-select me-2" name="poli" id="poliSelect">
                             <option value="">Semua Poli</option>
-                            <option value="Poli Umum">Poli Umum</option>
-                            <option value="Poli Gigi & Mulut">Poli Gigi & Mulut</option>
-                            <option value="Poli KIA">Poli KIA</option>
-                            <option value="UGD">UGD</option>
+                            <option value="Poli Umum" {{ request('poli') == 'Poli Umum' ? 'selected' : '' }}>Poli Umum</option>
+                            <option value="Poli Gigi & Mulut" {{ request('poli') == 'Poli Gigi & Mulut' ? 'selected' : '' }}>Poli Gigi & Mulut</option>
+                            <option value="Poli KIA" {{ request('poli') == 'Poli KIA' ? 'selected' : '' }}>Poli KIA</option>
+                            <option value="UGD" {{ request('poli') == 'UGD' ? 'selected' : '' }}>UGD</option>
                         </select>
-                        <button class="btn-cari" type="submit">Filter</button>
+                        <!-- Removed the filter button -->
                     </form>
                 </div>
                 <div class="table-responsive">
@@ -161,9 +161,14 @@ Salam hangat,
 
 @push('scripts')
 <script>
+// Listen for changes on the poli dropdown
+document.getElementById('poliSelect').addEventListener('change', function() {
+    document.getElementById('filterForm').submit();
+});
+
 // Fungsi untuk mengucapkan panggilan antrian
-function speakAntrian(noAntrian, namaDokter) {
-    const text = `Nomor Antrian ${noAntrian} silahkan menuju ke ruangan ${namaDokter}`;
+function speakAntrian(noAntrian, namaPasien, namaDokter) {
+    const text = `Nomor Antrian ${noAntrian} atas nama ${namaPasien}, silahkan menuju ke ruangan ${namaDokter}`;
 
     if ('speechSynthesis' in window) {
         // Hentikan pembicaraan yang sedang berlangsung
@@ -198,7 +203,7 @@ function speakAntrian(noAntrian, namaDokter) {
         console.warn('Text-to-Speech tidak didukung di browser ini');
         // Fallback: Play audio dari file jika tersedia
         // atau tampilkan notifikasi visual
-        alert(`Nomor Antrian ${noAntrian}, dengan Dokter ${namaDokter}, silahkan menuju ke ruangan`);
+        alert(`Nomor Antrian ${noAntrian} atas nama ${namaPasien}, silahkan menuju ke ruangan ${namaDokter}`);
     }
 }
 
@@ -220,6 +225,7 @@ $(document).on('click', '.call-btn', function() {
     const antrianId = $(this).data('id');
     const row = $(this).closest('tr');
     const noAntrian = row.find('td:nth-child(2)').text();
+    const namaPasien = row.find('td:nth-child(3)').text();
     const namaDokter = row.find('td:nth-child(5)').text() || 'Dokter';
 
     if (!confirm('Apakah Anda yakin ingin memanggil antrian ini?')) {
@@ -234,8 +240,8 @@ $(document).on('click', '.call-btn', function() {
         },
         success: function(response) {
             if (response.success) {
-                // Memanggil fungsi suara
-                speakAntrian(noAntrian, namaDokter);
+                // Memanggil fungsi suara dengan nama pasien
+                speakAntrian(noAntrian, namaPasien, namaDokter);
                 alert(response.message);
                 location.reload();
             } else {
@@ -277,6 +283,7 @@ function kirimEmail(antrianId) {
 function ulangiPanggil(antrianId) {
     const row = $(`button[onclick="ulangiPanggil(${antrianId})"]`).closest('tr');
     const noAntrian = row.find('td:nth-child(2)').text();
+    const namaPasien = row.find('td:nth-child(3)').text();
     const namaDokter = row.find('td:nth-child(5)').text() || 'Dokter';
 
     if (!confirm('Apakah Anda yakin ingin mengulangi panggilan antrian ini?')) {
@@ -291,8 +298,8 @@ function ulangiPanggil(antrianId) {
         },
         success: function(response) {
             if (response.success) {
-                // Memanggil fungsi suara
-                speakAntrian(noAntrian, namaDokter);
+                // Memanggil fungsi suara dengan nama pasien
+                speakAntrian(noAntrian, namaPasien, namaDokter);
 
                 // Update jumlah panggilan
                 $('#call-count-' + antrianId).text(response.count);
@@ -337,6 +344,7 @@ function markAsNotPresent(antrianId) {
 function recallPending(antrianId) {
     const row = $(`button[onclick="recallPending(${antrianId})"]`).closest('tr');
     const noAntrian = row.find('td:nth-child(2)').text();
+    const namaPasien = row.find('td:nth-child(3)').text();
     const namaDokter = row.find('td:nth-child(5)').text() || 'Dokter';
 
     if (!confirm('Apakah Anda yakin ingin memanggil ulang antrian ini?')) {
@@ -351,16 +359,21 @@ function recallPending(antrianId) {
         },
         success: function(response) {
             if (response.success) {
-                // Memanggil fungsi suara
-                speakAntrian(noAntrian, namaDokter);
+                // Memanggil fungsi suara dengan nama pasien
+                speakAntrian(noAntrian, namaPasien, namaDokter);
                 alert(response.message);
                 location.reload();
             } else {
                 alert('Gagal: ' + response.message);
+                if (response.redirect) {
+                    location.reload();
+                }
             }
         },
-        error: function() {
-            alert('Terjadi kesalahan saat memanggil ulang');
+        error: function(xhr) {
+            const errMsg = xhr.responseJSON?.message || 'Terjadi kesalahan saat memanggil ulang';
+            alert(errMsg);
+            console.error(xhr);
         }
     });
 }

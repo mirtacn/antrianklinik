@@ -65,7 +65,7 @@ class PanggilController extends Controller
 
     public function panggil($id)
     {
-        $antrian = Antrian::with(['jadwaldokter', 'poli'])->find($id);
+        $antrian = Antrian::with(['jadwaldokter', 'poli', 'pasienUmum', 'pasienBPJS'])->find($id);
 
         if (!$antrian) {
             return response()->json(['success' => false, 'message' => 'Data antrian tidak ditemukan'], 404);
@@ -84,13 +84,14 @@ class PanggilController extends Controller
             'success' => true,
             'message' => 'Antrian berhasil dipanggil',
             'no_antrian' => $antrian->poli->kode_poli . $antrian->no_antrian,
-            'nama_dokter' => $antrian->jadwaldokter->dokter->nama_dokter ?? 'Dokter'
+            'nama_dokter' => $antrian->jadwaldokter->dokter->nama_dokter ?? 'Dokter',
+            'nama_pasien' => $antrian->pasien_umum->nama ?? $antrian->pasien_bpjs->nama ?? 'Pasien'
         ]);
     }
 
     public function ulangiPanggil(Request $request, $id)
     {
-        $antrian = Antrian::with(['jadwaldokter', 'poli'])->findOrFail($id);
+        $antrian = Antrian::with(['jadwaldokter', 'poli', 'pasienUmum', 'pasienBPJS'])->findOrFail($id);
 
         if ($antrian->status_antrian === 'tidak hadir') {
             return response()->json([
@@ -100,6 +101,7 @@ class PanggilController extends Controller
                 'count' => $antrian->panggilan_count,
                 'antrian' => [
                     'no_antrian' => $antrian->kode_poli . $antrian->no_antrian,
+                    'nama_pasien' => $antrian->pasienUmum->nama ?? $antrian->pasienBPJS->nama ?? 'Pasien',
                     'nama_poli' => $antrian->poli->nama_poli,
                     'nama_dokter' => $antrian->jadwaldokter->dokter->nama_dokter ?? 'Dokter'
                 ]
@@ -118,6 +120,7 @@ class PanggilController extends Controller
                 'count' => $antrian->panggilan_count,
                 'antrian' => [
                     'no_antrian' => $antrian->kode_poli . $antrian->no_antrian,
+                    'nama_pasien' => $antrian->pasien_umum->nama ?? $antrian->pasien_bpjs->nama ?? 'Pasien',
                     'nama_poli' => $antrian->poli->nama_poli,
                     'nama_dokter' => $antrian->jadwaldokter->dokter->nama_dokter ?? 'Dokter'
                 ]
@@ -134,6 +137,7 @@ class PanggilController extends Controller
             'message' => 'Panggilan diulangi (' . $antrian->panggilan_count . '/3)',
             'count' => $antrian->panggilan_count,
             'no_antrian' => $antrian->poli->kode_poli . $antrian->no_antrian,
+            'nama_pasien' => $antrian->pasien_umum->nama ?? $antrian->pasien_bpjs->nama ?? 'Pasien',
             'nama_dokter' => $antrian->jadwaldokter->dokter->nama_dokter ?? 'Dokter'
         ]);
     }
@@ -168,25 +172,28 @@ class PanggilController extends Controller
     public function recallPending($id)
     {
         try {
-            $antrian = Antrian::with('dokter')->findOrFail($id);
+            $antrian = Antrian::with(['poli', 'jadwaldokter.dokter', 'pasienUmum', 'pasienBPJS'])->findOrFail($id);
 
             if ($antrian->status_antrian !== 'pending') {
                 return response()->json([
                     'success' => false,
                     'message' => 'Hanya antrian dengan status pending yang bisa dipanggil ulang'
-                ]);
+                ], 400);
             }
 
-            $antrian->status_antrian = 'dipanggil';
-            $antrian->panggilan_count = 0;
-            $antrian->last_panggilan = now();
-            $antrian->save();
+            // Reset panggilan count dan ubah status
+            $antrian->update([
+                'status_antrian' => 'dipanggil',
+                'panggilan_count' => 1, // Reset ke 1 karena ini panggilan baru
+                'last_panggilan' => now()
+            ]);
 
             return response()->json([
                 'success' => true,
                 'message' => 'Antrian pending berhasil dipanggil ulang',
-                'no_antrian' => $antrian->kode_poli . $antrian->no_antrian,
-                'nama_dokter' => $antrian->dokter->nama_dokter ?? 'Dokter'
+                'no_antrian' => $antrian->poli->kode_poli . $antrian->no_antrian,
+                'nama_pasien' => $antrian->pasienUmum->nama ?? $antrian->pasienBPJS->nama ?? 'Pasien',
+                'nama_dokter' => $antrian->jadwaldokter->dokter->nama_dokter ?? 'Dokter'
             ]);
         } catch (\Exception $e) {
             return response()->json([
