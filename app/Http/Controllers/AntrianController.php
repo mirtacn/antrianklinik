@@ -344,9 +344,6 @@ class AntrianController extends Controller
 
             DB::commit();
 
-            // Send email notification
-            Mail::to($request->email)->send(new AntrianStrukMail($antrian)); // Add this line
-
             session(['antrian_id' => $antrian->id]);
             return redirect()->route('struk');
         } catch (\Exception $e) {
@@ -355,6 +352,8 @@ class AntrianController extends Controller
             return back()->with('error', 'Gagal menyimpan antrian: ' . $e->getMessage())->withInput();
         }
     }
+
+
 
     public function cariPasien(Request $request)
     {
