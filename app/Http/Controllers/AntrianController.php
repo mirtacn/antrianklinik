@@ -108,6 +108,7 @@ class AntrianController extends Controller
             ->find(session('antrian_id'));
 
         if (!$antrian) {
+
             return redirect()->route('pesan');
         }
 
