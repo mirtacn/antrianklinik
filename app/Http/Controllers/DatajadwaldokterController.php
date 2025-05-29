@@ -29,7 +29,7 @@ class DatajadwaldokterController extends Controller
 
 public function index(Request $request)
 {
-    $query = Jadwaldokter::with(['dokter', 'poli']); // Added 'poli' to eager load the relationship
+    $query = Jadwaldokter::with(['dokter', 'poli']); 
 
     if ($request->has('search')) {
         $search = $request->search;

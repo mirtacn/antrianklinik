@@ -272,12 +272,10 @@ class PanggilController extends Controller
                     ->limit(3)
                     ->get();
 
-                // Format waiting list
                 $formattedWaitingList = $waitingList->map(function ($item) {
                     return [
                         'no_antrian' => $item->no_antrian,
                         'nama' => $item->pasienumum->nama ?? $item->pasienbpjs->nama ?? '-',
-                        // tambahkan field lain yang diperlukan
                     ];
                 });
 

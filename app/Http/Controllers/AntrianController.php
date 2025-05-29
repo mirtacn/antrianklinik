@@ -184,7 +184,7 @@ class AntrianController extends Controller
                 },
             ],
         ], [
-            'no_telepon.not_regex' => 'Nomor telepon tidak boleh diawali dengan 0, +62, atau 62 (contoh: 85732978938)',
+            'no_telepon.not_regex' => ' telepon tidak boleh diNomorawali dengan 0, +62, atau 62 (contoh: 85732978938)',
             'email.email' => 'Format email tidak valid',
         ]);
 
