@@ -344,6 +344,7 @@ class AntrianController extends Controller
             $jadwalDokter->save();
 
             DB::commit();
+            Mail::to($antrian->email)->send(new AntrianStrukMail($antrian));
 
             session(['antrian_id' => $antrian->id]);
             return redirect()->route('struk');

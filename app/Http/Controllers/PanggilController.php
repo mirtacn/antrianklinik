@@ -465,6 +465,7 @@ class PanggilController extends Controller
             ->join('poli', 'antrian.id_poli', '=', 'poli.id')
             ->select(
                 'antrian.no_antrian',
+                'poli.kode_poli',
                 DB::raw('COALESCE(pasien_umum.nama, pasien_bpjs.nama) AS nama')
             )
             ->where('antrian.id_poli', $antrian->id_poli)
