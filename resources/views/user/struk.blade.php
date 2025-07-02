@@ -34,7 +34,7 @@
             <a href="{{ route('download.struk') }}" class="btn-unduh">
                 <i class="bi bi-download"></i> Unduh struk antrian
             </a>
-            <a href="http://127.0.0.1:8000/monitor" class="btn-monitor">
+            <a href="/monitor" class="btn-monitor">
                 <i class="bi bi-display"></i> Monitor Antrian
             </a>
             <a href="javascript:void(0);" onclick="printStruk();" class="btn-unduh">

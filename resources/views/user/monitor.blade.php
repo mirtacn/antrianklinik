@@ -9,7 +9,7 @@
                 <div class="col-12">
                     <div class="row" id="doctorQueues">
                         <div class="text-center text-white">
-                            <h3>Memuat data antrian...</h3>
+                            <h3>Memuat data antrian</h3>
                         </div>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
                         <div class="${colClass} mb-3">
                             <div class="card antrian-box h-100">
                                 <div class="card-header py-2">
-                                    <h5 class="mb-0">DR. ${queue.doctor_name}</h5>
+                                    <h5 class="mb-0"> ${queue.doctor_name}</h5>
                                     <small class="text-center text-white">${queue.poli_name}</small>
                                 </div>
                                 <div class="card-body p-2">

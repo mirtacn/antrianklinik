@@ -15,8 +15,8 @@ use Carbon\Carbon;
 use App\Models\PasienUmum;
 use PDF;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail; // Add this line
-use App\Mail\AntrianStrukMail; // Add this line
+use Illuminate\Support\Facades\Mail;
+use App\Mail\AntrianStrukMail;
 
 class AntrianController extends Controller
 {
@@ -131,7 +131,7 @@ class AntrianController extends Controller
         return view('user.pesan', compact('dokter', 'layanan', 'poli', 'hariIni', 'besok'));
     }
 
-    public function simpan(Request $request)
+public function simpan(Request $request)
     {
         // Validasi awal tanggal
         $today = Carbon::today()->format('Y-m-d');
@@ -153,7 +153,6 @@ class AntrianController extends Controller
                 'not_regex:/^(0|\+62|62)/',
             ],
             'email' => [
-                'required',
                 'email',
                 function ($attribute, $value, $fail) {
                     if (!preg_match('/@gmail\.com$/', $value)) {
@@ -185,7 +184,7 @@ class AntrianController extends Controller
             ],
         ], [
             'no_telepon.not_regex' => ' telepon tidak boleh diNomorawali dengan 0, +62, atau 62 (contoh: 85732978938)',
-            'email.email' => 'Format email tidak valid',
+            // 'email.email' => 'Format email tidak valid',
         ]);
 
         // Dapatkan data layanan
@@ -344,7 +343,7 @@ class AntrianController extends Controller
             $jadwalDokter->save();
 
             DB::commit();
-            Mail::to($antrian->email)->send(new AntrianStrukMail($antrian));
+            // Mail::to($antrian->email)->send(new AntrianStrukMail($antrian));
 
             session(['antrian_id' => $antrian->id]);
             return redirect()->route('struk');

@@ -60,12 +60,12 @@
 
     <div class="divider"></div>
 
-    <div class="status-info">
+    {{-- <div class="status-info">
         <h4>Informasi Antrian Saat Ini => </h4>
         <p><strong>Nomor Antrian yang sedang dipanggil:</strong>{{ $antrian->current_called }}</p>
         <p><strong>Posisi Anda dalam antrian:</strong> {{ $antrian->your_position ?? '-' }} dari {{ $antrian->waiting_count}} pasien</p>
         <p><strong>Sisa pasien menunggu:</strong> {{ $antrian->waiting_count }} pasien</p>
-    </div>
+    </div> --}}
 
     <div class="divider"></div>
 

@@ -20,8 +20,8 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
-Route::post('/register', [AuthController::class, 'register']);
+// Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+// Route::post('/register', [AuthController::class, 'register']);
 
 Route::middleware(['auth'])->group(function () {
     // Dashboard
@@ -106,7 +106,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // ---Role User---
-Route::get('/index', [AntrianController::class, 'index'])->name('index');
+Route::get('/', [AntrianController::class, 'index'])->name('index');
 Route::get('/monitor', [AntrianController::class, 'monitor'])->name('monitor');
 Route::get('/struk', [AntrianController::class, 'struk'])->name('struk');
 Route::get('/pesan', [AntrianController::class, 'pesan'])->name('pesan');

@@ -27,9 +27,9 @@
                     <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password Anda" required>
                 </div>
                 <button type="submit" class="btn btn-submit w-100">Login</button>
-                <p style="margin-top: 10px;" class="text-end">
+                {{-- <p style="margin-top: 10px;" class="text-end">
                     Belum punya akun? <a href="{{ route('register') }}" class="register-link">Registrasi</a>
-                </p>
+                </p> --}}
             </form>
         </div>
     </div>

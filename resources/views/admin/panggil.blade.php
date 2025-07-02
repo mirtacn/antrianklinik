@@ -13,8 +13,9 @@
                             <option value="">Semua Poli</option>
                             <option value="Poli Umum" {{ request('poli') == 'Poli Umum' ? 'selected' : '' }}>Poli Umum</option>
                             <option value="Poli Gigi & Mulut" {{ request('poli') == 'Poli Gigi & Mulut' ? 'selected' : '' }}>Poli Gigi & Mulut</option>
-                            <option value="Poli KIA" {{ request('poli') == 'Poli KIA' ? 'selected' : '' }}>Poli KIA</option>
-                            <option value="UGD" {{ request('poli') == 'UGD' ? 'selected' : '' }}>UGD</option>
+                            <option value="Poli KIA/KB" {{ request('poli') == 'Poli KIA/KB' ? 'selected' : '' }}>Poli KIA/KB</option>
+                            <option value="Poli Kandungan" {{ request('poli') == 'Poli Kandungan' ? 'selected' : '' }}>Poli Kandungan</option>
+                            <option value="Poli Vaksinasi" {{ request('poli') == 'Poli Vaksinasi' ? 'selected' : '' }}>Poli Vaksinasi</option>
                         </select>
                         <!-- Removed the filter button -->
                     </form>
